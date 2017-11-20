@@ -1,6 +1,6 @@
 class PinsController < ApplicationController
   
-  before_action :find_pin, only: [:show, :edit, :update, :destroy]
+  before_action :find_pin, only: [:show, :edit, :update, :destroy, :upvote]
 
   def new
     @pin = current_user.pins.build
@@ -37,6 +37,11 @@ class PinsController < ApplicationController
 
   def show
 
+  end
+
+  def upvote
+    @pin.upvote_by current_user
+    redirect_back fallback_location: root_path
   end
 
   private
